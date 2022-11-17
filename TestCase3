@@ -1,0 +1,37 @@
+package TestNG;
+
+import org.testng.annotations.Test;
+import org.testng.AssertJUnit;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class testcase3 {
+	
+  @Test
+  public void test3 () throws Exception {
+	  
+
+		System.setProperty("webdriver.chrome.driver", "/Users/morouj/Downloads/TechmeSelenium/chromedriver.exe"); // here we put path and file name
+		WebDriverManager.chromedriver().setup(); // setup
+		WebDriver driver= new ChromeDriver(); // object
+        Thread.sleep(3000); // timer
+        
+        
+        // the way for Handle Authenticated pop-ups because there is no locators can I use 
+        String username = "admin";
+        String password = "admin";
+        String URL = "https://" + username + ":" + password + "@" + "the-internet.herokuapp.com/basic_auth";
+        driver.get(URL);
+        
+        
+        // to Validate if the message is showing on the web page or not I using Assert method to compare between text & message in web
+        String text = driver.findElement(By.xpath("//*[@id=\"content\"]/div/p")).getText(); 
+        Thread.sleep(3000);
+        AssertJUnit.assertEquals("Congratulations! You must have the proper credentials.", text);
+        System.out.println(text);
+  
+
+  }
+}
