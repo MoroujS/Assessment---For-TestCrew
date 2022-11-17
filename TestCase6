@@ -1,0 +1,55 @@
+package TestNG;
+
+import org.testng.annotations.Test;
+import java.io.File;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.TakesScreenshot;
+
+public class testcase6 {
+	
+ @Test
+ 
+public void test6 () throws Exception {
+	  
+		  
+		        System.setProperty("webdriver.chrome.driver", "/Users/morouj/Downloads/TechmeSelenium/chromedriver.exe"); // here we put path and file name
+				WebDriverManager.chromedriver().setup(); // setup
+				WebDriver driver = new ChromeDriver(); // object
+				driver.navigate().to("https://www.dummyticket.com/dummy-ticket-for-visa-application/");  // open the WebSite for testing
+		    	driver.manage().window().maximize(); // To max the browser 
+		        Thread.sleep(3000); // timer
+		        
+		        
+		        
+		        //find the xpath of the calendar 
+		        driver.findElement(By.xpath("//input[@id='dob']")).click();
+
+		        // to select from calender 
+		        Select Year = new Select(driver.findElement(By.xpath("/html/body/div[5]/div[1]/div/select[2]")));
+		        Year.selectByVisibleText("2022");
+		        Year.selectByValue("2000");
+		        Thread.sleep(3000);
+		        Select month = new Select(driver.findElement(By.xpath("//select[@aria-label='Select month']")));
+		        month.selectByVisibleText("Jan");
+		        Thread.sleep(3000);
+		        // day
+		        driver.findElement(By.xpath("//*[@id=\"ui-datepicker-div\"]/table/tbody/tr[4]/td[1]/a")).click();
+        
+		       // to take a screenshot
+		        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		        FileUtils.copyFile(scrFile, new File("C:/Users/morouj/Downloads/"));
+
+        
+
+        
+        
+  }
+  
+}
