@@ -1,0 +1,60 @@
+package TestNG;
+
+import org.testng.annotations.Test;
+
+import java.io.File;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+
+public class testcase7 {
+	
+ @Test
+ 
+public void test7 () throws Exception {
+	  
+		  
+		        System.setProperty("webdriver.chrome.driver", "/Users/morouj/Downloads/TechmeSelenium/chromedriver.exe"); // here we put path and file name
+				WebDriverManager.chromedriver().setup(); // setup
+				WebDriver driver = new ChromeDriver(); // object
+				driver.navigate().to("https://www.selenium.dev/selenium/docs/api/java/index.html?overview-summary.html");  // open the WebSite for testing
+		    	driver.manage().window().maximize(); // To max the browser 
+		        Thread.sleep(3000); // timer
+		        
+		       
+		        
+		        // using switch to method to switch between frames 
+		        driver.switchTo().frame(driver.findElement(By.xpath("//body/main[1]/div[1]/div[1]/div[1]/iframe[1]")));
+		        driver.switchTo().defaultContent();
+		        Thread.sleep(3000);
+		        
+		      
+		        driver.switchTo().frame(driver.findElement(By.cssSelector("iframe[title='All classes and interfaces (except non-static nested types)']")));
+		        driver.switchTo().defaultContent();
+		        Thread.sleep(3000);
+		        
+		       
+		        driver.switchTo().frame(driver.findElement(By.cssSelector("iframe[title='Package, class and interface descriptions']")));
+		        Thread.sleep(3000);
+		        
+		        // click on element in frame 3
+		        
+		        WebElement c= driver.findElement(By.cssSelector("a[href='org/openqa/selenium/package-summary.html']"));
+		        c.click();
+		        Thread.sleep(3000);
+		       
+			     // to take a screenshot
+		        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		        FileUtils.copyFile(scrFile, new File("C:/Users/morouj/Downloads/"));
+
+
+}
+ 
+}
