@@ -1,0 +1,42 @@
+package TestNG;
+
+import org.testng.annotations.Test;
+import org.testng.AssertJUnit;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class testcase4 {
+	
+  @Test
+  public void test4 () throws Exception {
+	  
+
+		System.setProperty("webdriver.chrome.driver", "/Users/morouj/Downloads/TechmeSelenium/chromedriver.exe"); // here we put path and file name
+		WebDriverManager.chromedriver().setup(); // setup
+		WebDriver driver = new ChromeDriver(); // object
+		driver.navigate().to("https://jqueryui.com/tooltip/");  // open the WebSite for testing
+    	driver.manage().window().maximize(); // To max the browser 
+        Thread.sleep(3000); // timer
+        
+        
+        // to click on age 
+       
+        WebElement f = driver.findElement(By.xpath("//*[@id=\"content\"]/iframe"));
+        driver.switchTo().frame(f);
+        WebElement a = driver.findElement(By.xpath("//input[@id='age']"));
+        a.click();
+     
+        // get text from tooltip
+     
+        WebElement h = driver.findElement(By.xpath("//div[@class='ui-helper-hidden-accessible']"));
+        String text = h.getText();
+   
+       // to Validate if the tooltip message with the expected, I using Assert method to compare between text & message in tooltip 
+        AssertJUnit.assertEquals("We ask for your age only for statistical purposes.", text);
+        System.out.println(text);
+        
+  }
+}
